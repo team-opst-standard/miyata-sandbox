@@ -1,0 +1,12 @@
+# hosts ファイルの development グループ用 playbook
+- hosts: development
+  # vagrant ユーザーが sudo でタスクを実施するための設定
+  user: vagrant
+  sudo: yes
+  # タスクはモジュール化がベスト
+  roles:
+    - common
+#     - nginx_14
+#     - mysql_55
+#     - jdk_1851
+#     - php_56

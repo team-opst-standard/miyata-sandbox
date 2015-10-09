@@ -1,0 +1,7 @@
+# 確認用にdevelopmentとほぼ同じ内容で作成しているだけ
+- hosts: webservers
+  user: vagrant
+  sudo: yes
+  tasks:
+    - name: webservers check
+      command: "/bin/echo 'ansible webservers!!'"

@@ -1,0 +1,16 @@
+[defaults]
+192.168.33.10
+
+# Guest: Windows, Host: Linux のときは自身に対して ansible-playbook を実行するので localhost
+[windows_host]
+127.0.0.1
+
+# 開発サーバのIP(VagrantのNodeのIPと同一)
+[development]
+192.168.33.10 
+
+[webservers]
+192.168.33.10 
+
+[dbservers]
+192.168.33.10 
