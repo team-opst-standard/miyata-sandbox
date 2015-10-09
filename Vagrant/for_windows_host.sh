@@ -1,10 +1,32 @@
 #!/bin/sh
 
 # for_windows_host.sh
-$GROUP=$1
+GROUP="windows_host"
+echo "Execution Start Ansible GROUP=$GROUP"
 
-# Ansible インストール
-yum install -y ansible
+echo "[command]PRIVATE_KEY_FILE=/vagrant/.vagrant/machines/default/virtualbox/private_key"
+PRIVATE_KEY_FILE="/vagrant/.vagrant/machines/default/virtualbox/private_key"
 
-# Ansible 実行
-ansible-playbook /vagrant/playbook/site.yml -i /vagrant/playbook/hosts $GROUP
+echo "[command]export ANSIBLE_HOST_KEY_CHECKING=False"
+export ANSIBLE_HOST_KEY_CHECKING=False
+
+# install Ansible
+echo "[command]sudo yum install -y ansible"
+sudo yum install -y ansible
+
+# execute Ansible
+cat << EOS
+[command]ansible-playbook /vagrant/playbook/site.yml 
+-i /vagrant/playbook/inventories/development 
+--private-key=$PRIVATE_KEY_FILE 
+--extra-vars="provision_target=$GROUP" 
+--verbose
+EOS
+
+ansible-playbook /vagrant/playbook/site.yml \
+-i /vagrant/playbook/inventories/development \
+--private-key=$PRIVATE_KEY_FILE \
+--extra-vars="provision_target=$GROUP" \
+--verbose
+
+echo "End of execution Ansible GROUP=$GROUP"

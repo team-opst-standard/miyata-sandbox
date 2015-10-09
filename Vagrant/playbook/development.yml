@@ -1,9 +1,17 @@
-# hosts ファイルの development グループ用 playbook
-- hosts: development
+#
+# 開発環境用 playbook
+#
+
+# hosts ファイルのグループ(Windows: windows_host, Mac: development)
+- hosts: "{{ provision_target }}"
+  #
   # vagrant ユーザーが sudo でタスクを実施するための設定
+  #
   user: vagrant
   sudo: yes
-  # タスクはモジュール化がベスト
+  #
+  # タスクは roles を使用してモジュール化するのがベスト
+  #
   roles:
     - common
 #     - nginx_14

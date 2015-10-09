@@ -6,6 +6,10 @@
 - name: printing roles/common/vars/main.yml
   command: "/bin/echo {{ common_var }}"
 
+- name: install tree command
+  yum:
+    name: tree
+    state: latest
 # yum のモジュール更新
 # - name: update yum modules
 #   # yum: "name=* state=latest" とも書ける

@@ -1,4 +1,4 @@
-# 確認用にdevelopmentとほぼ同じ内容で作成しているだけ
+# 確認用
 - hosts: webservers
   user: vagrant
   sudo: yes

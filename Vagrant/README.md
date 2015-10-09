@@ -66,6 +66,7 @@ cd /path/to/vagrant_dir
 git clone https://github.com/team-opst-standard/miyata-sandbox.git
 cd miyata-sandbox/Vagrant
 # Vagrantfile を Windows 用に編集する(コメントアウトの切替のみ)
+# @NOTEになっている部分を修正
 vim Vagrantfile
 
 # provisioning で playbook も実行

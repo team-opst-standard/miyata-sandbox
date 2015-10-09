@@ -6,6 +6,7 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
+    Encoding.default_external = 'UTF-8'
     # The most common configuration options are documented and commented below.
     # For a complete reference, please see the online documentation at
     # https://docs.vagrantup.com.
@@ -41,6 +42,10 @@ Vagrant.configure(2) do |config|
     # the path on the guest to mount the folder. And the optional third
     # argument is a set of non-required options.
     # config.vm.synced_folder "../data", "/vagrant_data"
+    config.vm.synced_folder "./", "/vagrant", :mount_options => ["dmode=777","fmode=666"]
+
+    # @NOTE for Windows (ssh connection to localhost is required private_key file)
+    config.vm.synced_folder "./.vagrant/machines/default/virtualbox/", "/vagrant/.vagrant/machines/default/virtualbox/", :mount_options => ["dmode=777","fmode=600"]
 
     # Provider-specific configuration so you can fine-tune various
     # backing providers for Vagrant. These expose provider-specific options.
@@ -68,14 +73,15 @@ Vagrant.configure(2) do |config|
     # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
     # documentation for more information about their specific syntax and use.
 
-    # for Windows (WindowsだとAnsible動かないので、仮想マシン内で自分に実行する)
-    # config.vm.provision "shell", inline: "/bin/sh /vagrant/for_windows_host.sh windows_host"
+    # @NOTE for Windows (WindowsだとAnsibleは動かないので、仮想マシン内で自分に実行する)
+    config.vm.provision :shell, path: "for_windows_host.sh"
 
-    # for Mac
-    config.vm.provision "ansible" do |ansible|
-        ansible.playbook       = "playbook/site.yml"
-        ansible.inventory_path = "playbook/hosts"
-        ansible.limit          = "development"
-        ansible.verbose        = "v"
-    end
+    # @NOTE for Mac
+    # config.vm.provision "ansible" do |ansible|
+    #     ansible.playbook       = "playbook/site.yml"
+    #     ansible.inventory_path = "playbook/inventories/development"
+    #     ansible.limit          = "development"
+    #     ansible.verbose        = "v"
+    #     ansible.extra_vars     = {provision_target: 'development'}
+    # end
 end
