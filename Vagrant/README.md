@@ -42,30 +42,14 @@ SETX /M PATH "%PATH%;C:\tools\mingw64\bin;"
 
 ## Vagrantセットアップ
 
-最終的に git clone & vagrant up で終わらせるのが狙い
-
-### Mac
+基本的に git clone & vagrant up で終わり
 
 ```
 cd /path/to/vagrant_dir
 git clone https://github.com/team-opst-standard/miyata-sandbox.git
 cd miyata-sandbox/Vagrant
 
-# provisioning で playbook も実行
-vagrant up
-
-# やり直す
-vagrant destroy -f
-vagrant up
-```
-
-### Windows
-
-```
-cd /path/to/vagrant_dir
-git clone https://github.com/team-opst-standard/miyata-sandbox.git
-cd miyata-sandbox/Vagrant
-# Vagrantfile を Windows 用に編集する(コメントアウトの切替のみ)
+# Vagrantfile を Windows or Mac 用に編集する(コメントアウトの切替のみ)
 # @NOTEになっている部分を修正
 vim Vagrantfile
 
@@ -77,18 +61,29 @@ vagrant destroy -f
 vagrant up
 ```
 
-## Ansible の設定
+## Ansible のシンプルな設定例
 
 ### ディレクトリ構造について
-基本的に公式のベストプラクティスをそのまま使っている
+公式のベストプラクティスをそのまま使う
 * http://docs.ansible.com/ansible/playbooks_best_practices.html#directory-layout
 
-### タスク登録について
+```
+playbook/
+├── development.yml        ... playbook 本体
+├── hosts                  ... 対象のサーバ情報を記載するファイル
+└── roles/                 ... モジュール化したタスクを登録するディレクトリ(後述)
+     └── common/
+         └── tasks/
+              └── main.yml
+```
+
+### タスクに設定するパラメータについて
 各コマンドの書き方は下記URL
 * http://www.kyoshida.jp/ansibledoc-ja/list_of_all_modules.html
 
 検索してもこれを紹介しているところがほとんど無く、  
 パラメータのキーがなぜそうなっているのかわかりづらかった...  
+（`name` はわかるけど `yum`, `name`, `state` あたりはどこから来たの状態）
 
 ＼公式ドキュメント万歳 & 翻訳感謝／
 
@@ -108,9 +103,7 @@ $ ansible defaults \
 --su-user=root \
 --verbose
 
-# hostsに下記設定を記載すればコマンドは少し短くなる
-# playbook で実行する場合は playbook/hosts にこう書いたほうがいいのだろうか...?
-# ここにベタに書かなくてもいい方法があるはず！
+# playbook/hosts に下記設定を記載すればコマンドはその分短くなる
 [default]
 192.168.33.10 ansible_ssh_private_key_file=/path/to/Vagrant/.vagrant/machines/default/virtualbox/private_key ansible_ssh_user=vagrant
 
@@ -118,19 +111,21 @@ $ ansible defaults \
 $ ansible defaults -i /path/to/Vagrant/playbook/hosts -m yum -a "name=* state=latest"
 ```
 
-### 上記ansibleコマンドと同じことをansible-playbookでやってみる
+### 上記ansibleコマンドと同じことを ansible-playbook でやってみる
 
 ```
-# hosts
+# playbook/hosts
 [default]
 192.168.33.10
 
-# development.yml
+# playbook/development.yml
 - hosts: development
+  user: vagrant
+  sudo: yes
   roles:
     - common
 
-# roles/common/tasks/main.yml
+# playbook/roles/common/tasks/main.yml
 - name: update yum modules
   # yum: name=* state=latest とも書ける
   yum:
@@ -138,11 +133,11 @@ $ ansible defaults -i /path/to/Vagrant/playbook/hosts -m yum -a "name=* state=la
     state: latest
 ```
 
-当然他にも色々できるのでroleディレクトリ配下参照
+当然他にも色々できるので `roles` ディレクトリにどんどん追加していく
 
 ## Roles について
 タスクはずらずら書くのではなくモジュール化するのが良いとのこと。  
-そのモジュールを配置するのが roles ディレクトリ。
+そのモジュールを配置するのが `roles` ディレクトリ。
 
 @TODO `main.yml` という名前があるくらいだから include して他のファイルも定義できそう？
 
@@ -150,27 +145,32 @@ $ ansible defaults -i /path/to/Vagrant/playbook/hosts -m yum -a "name=* state=la
 ```
 playbook/roles/
 └── common               ... モジュール名。playbook に記載する名前そのもの
-    ├── handlers         ... @TODO 何に使用するか調査中
-    │   └── main.yml
     ├── tasks            ... 実行するタスクを main.yml に記載
+    │   └── main.yml
+    ├── handlers         ... @TODO 調査中
     │   └── main.yml
     ├── templates        ... @TODO 調査中。設定ファイルなどをテンプレート化して反映するのに使う
     │   └── main.yml
-    └── vars             ... この roles 内で使用するための変数を main.yml に定義
+    ├── files            ... @TODO 調査中
+    │   ├── hoge.txt
+    │   └── fuga.sh
+    ├── vars             ... この roles 内で使用するための変数を main.yml に定義
+    │   └── main.yml
+    ├── defaults         ... @TODO 調査中
+    │   └── main.yml
+    └── meta             ... @TODO 調査中
         └── main.yml
 ```
 
 
 # 進捗ここまで
 
+これから書くこと
+* このリポジトリの設定ファイルに関する情報(`vagrant up` で何が起こるのか)
+* Windows版で使用するfor_windows_host.shの説明
 
-## 実行流れ？
-playbookディレクトリ直下のsite.ymlがマスターとなって
-development.yml, webserver.yml, dbserver.ymlを呼び出す。
-これで一気に作れる。
-
-↓動作が怪しい
-ローカルの仮想マシンに実行する場合、cloneしたVagrantfileのansible.limitの値を"development"に設定してから実行する。そうすることでhostsをdevelopmentに限定できる。全部やるときは"all"で。
+これからやること
+* playbook の roles 内をどんどん増やす
 
 ## 参考サイト
 * https://1000ch.net/posts/2015/vagrant-ansible.html
