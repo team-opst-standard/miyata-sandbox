@@ -90,6 +90,10 @@ playbook/
 ### ansible-playbook の前に ansible をやってみる
 
 ```
+# playbook/hosts を Vagrant の IP に向ける
+[default]
+192.168.33.10
+
 # オプション詳細確認
 $ ansible --help
 
@@ -115,7 +119,7 @@ $ ansible defaults -i /path/to/Vagrant/playbook/hosts -m yum -a "name=* state=la
 
 ```
 # playbook/hosts
-[default]
+[development]
 192.168.33.10
 
 # playbook/development.yml
@@ -127,10 +131,12 @@ $ ansible defaults -i /path/to/Vagrant/playbook/hosts -m yum -a "name=* state=la
 
 # playbook/roles/common/tasks/main.yml
 - name: update yum modules
-  # yum: name=* state=latest とも書ける
+  # yum: "name=* state=latest" とも書ける
   yum:
-    name: *
+    name: "*"
     state: latest
+
+$ ansible-playbook /path/to/development.yml -i /path/to/hosts
 ```
 
 当然他にも色々できるので `roles` ディレクトリにどんどん追加していく
