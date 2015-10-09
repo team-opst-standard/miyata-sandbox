@@ -180,5 +180,3 @@ playbook/roles/
 * http://www.moyashi-koubou.com/blog/vagrant_ansible_windows/
 * 日本語: http://www.kyoshida.jp/ansibledoc-ja/
 
-
-
