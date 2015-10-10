@@ -4,37 +4,84 @@ Vagrant & Ansible 環境構築
 ## はじめに
 まだ妄言がほとんどです。
 
-## Vagrant 用意
+## 各種ツールのインストール
 ### パッケージ管理ツール
-* `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"`
-* `@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin`
 
-### cask(Mac)
-* `brew install caskroom/cask/brew-cask`
+* Mac
+
+```bash
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+```
+
+* Windows
+
+```bash
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+```
+
+### cask(Macのみ)
+
+```bash
+brew install caskroom/cask/brew-cask
+```
 
 ### VirtualBox(5.0.6)
-* `brew cask install virtualbox`
-* `choco install -y virtualbox`
+* Mac
+
+```bash
+brew cask install virtualbox
+```
+
+* Windows
+
+```bash
+choco install -y virtualbox
+```
+
 * ※自宅の Windows 環境だと何故か `4.2.12` まで落とさないとNGなので手動でインストール  
 VirtualBox は基本的に最新版だと動作しないイメージだなぁ...  
-ひとまずあとで下を試す(バージョン指定)  
-`choco install virtualbox -version 4.2.12`
+ということでバージョンを指定  
+
+```bash
+choco install virtualbox -version 4.2.12
+```
 
 ### Vagrant(1.7.4)
-* `brew cask install vagrant`
-* `choco install -y vagrant`
+* Mac
+
+```bash
+brew cask install vagrant
+```
+
+* Windows
+
+```bash
+choco install -y vagrant
+```
 
 ### Git(2.6.1)
-* `brew install git`
-* `choco install -y git`
+* Mac
+
+```bash
+brew install git
+```
+
+* Windows
+
+```bash
+choco install -y git
+```
 
 ### Ansible(Macのみ)
-* `brew install ansible`
+
+```bash
+brew install ansible
+```
 
 ### MinGW(Windows)
 * 下の方法ではエラーになったので、今は深く掘り下げずに手動インストール
 
-```
+```bash
 choco install -y mingw
 choco install -y mingw-get -version 1.0.3
 
@@ -42,15 +89,17 @@ choco install -y mingw-get -version 1.0.3
 SETX /M PATH "%PATH%;C:\tools\mingw64\bin;"
 ```
 
-* 手動でインストールした時の参考
-* http://web.plus-idea.net/2014/06/mingw-install-2014/
-* `SETX /M PATH "%PATH%;C:\MinGW\msys\1.0\bin;"`
+* <a href="http://web.plus-idea.net/2014/06/mingw-install-2014/" target="_blank">手動でインストールした時の参考</a>
+
+```bash
+SETX /M PATH "%PATH%;C:\MinGW\msys\1.0\bin;"
+```
 
 ## Vagrantセットアップ
 
 基本的に git clone & vagrant up で終わり
 
-```
+```bash
 cd /path/to/vagrant_dir
 git clone https://github.com/team-opst-standard/miyata-sandbox.git
 cd miyata-sandbox/Vagrant
@@ -73,7 +122,7 @@ vagrant up
 公式のベストプラクティスをそのまま使う
 * http://docs.ansible.com/ansible/playbooks_best_practices.html#directory-layout
 
-```
+```bash
 playbook/
 ├── development.yml        ... playbook 本体
 ├── hosts                  ... 対象のサーバ情報を記載するファイル
@@ -83,19 +132,19 @@ playbook/
               └── main.yml
 ```
 
-### タスクに設定するパラメータについて
+### タスクの書き方について
 各コマンドの書き方は下記URL
 * http://www.kyoshida.jp/ansibledoc-ja/list_of_all_modules.html
 
 検索してもこれを紹介しているところがほとんど無く、  
 パラメータのキーがなぜそうなっているのかわかりづらかった...  
-（`name` はわかるけど `yum`, `name`, `state` あたりはどこから来たの状態）
+（`name` はわかるけど `yum`, `name`, `state` あたりはどこから来たんだ状態）
 
 ＼公式ドキュメント万歳 & 翻訳感謝／
 
 ### ansible-playbook の前に ansible をやってみる
 
-```
+```bash
 # playbook/hosts を Vagrant の IP に向ける
 [default]
 192.168.33.10
@@ -123,7 +172,7 @@ $ ansible defaults -i /path/to/Vagrant/playbook/hosts -m yum -a "name=* state=la
 
 ### 上記ansibleコマンドと同じことを ansible-playbook でやってみる
 
-```
+```bash
 # playbook/hosts
 [development]
 192.168.33.10
@@ -154,7 +203,8 @@ $ ansible-playbook /path/to/development.yml -i /path/to/hosts
 @TODO `main.yml` という名前があるくらいだから include して他のファイルも定義できそう？
 
 ### 構成例は下記
-```
+
+```bash
 playbook/roles/
 └── common               ... モジュール名。playbook に記載する名前そのもの
     ├── tasks            ... 実行するタスクを main.yml に記載
