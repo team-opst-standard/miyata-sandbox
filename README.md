@@ -94,7 +94,7 @@ SETX /M PATH "%PATH%;C:\MinGW\msys\1.0\bin;"
 ```bash
 cd /path/to/vagrant_dir
 git clone https://github.com/team-opst-standard/miyata-sandbox.git
-cd miyata-sandbox/Vagrant
+cd miyata-sandbox/vagrant
 
 # Vagrantfile を Windows or Mac 用に編集する(コメントアウトの切替のみ)
 # @NOTEになっている部分を修正
