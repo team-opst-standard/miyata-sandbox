@@ -9,6 +9,9 @@ Vagrant & Ansible 環境構築
 * `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"`
 * `@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin`
 
+### cask(Mac)
+* `brew install caskroom/cask/brew-cask`
+
 ### VirtualBox(5.0.6)
 * `brew cask install virtualbox`
 * `choco install -y virtualbox`
@@ -25,7 +28,10 @@ VirtualBox は基本的に最新版だと動作しないイメージだなぁ...
 * `brew install git`
 * `choco install -y git`
 
-### MinGW(Windowsのみ)
+### Ansible(Macのみ)
+* `brew install ansible`
+
+### MinGW(Windows)
 * 下の方法ではエラーになったので、今は深く掘り下げずに手動インストール
 
 ```
@@ -178,6 +184,12 @@ playbook/roles/
 これからやること
 * playbook の roles 内をどんどん増やす
 
+
+Ansibleの設定一覧
+* ansible 実行ディレクトリにansible.cfgをおいておけばそれが反映される  
+`~/.ansible.cfg` でもいいらしいがソース管理をするなら不便
+* https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg
+
 ## 参考サイト
 * https://1000ch.net/posts/2015/vagrant-ansible.html
 * http://docs.ansible.com/ansible/playbooks_best_practices.html#directory-layout
@@ -185,4 +197,4 @@ playbook/roles/
 * https://github.com/ansible/ansible-examples
 * http://www.moyashi-koubou.com/blog/vagrant_ansible_windows/
 * 日本語: http://www.kyoshida.jp/ansibledoc-ja/
-
+* http://keyamb.hatenablog.com/archive/category/Ansible

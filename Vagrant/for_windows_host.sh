@@ -18,15 +18,18 @@ sudo yum install -y ansible
 cat << EOS
 [command]ansible-playbook /vagrant/playbook/site.yml 
 -i /vagrant/playbook/inventories/development 
---private-key=$PRIVATE_KEY_FILE 
---extra-vars="provision_target=$GROUP" 
---verbose
+--connection=local 
 EOS
+# --private-key=$PRIVATE_KEY_FILE 
+# --extra-vars="provision_target=$GROUP" 
+# --verbose
 
 ansible-playbook /vagrant/playbook/site.yml \
 -i /vagrant/playbook/inventories/development \
---private-key=$PRIVATE_KEY_FILE \
---extra-vars="provision_target=$GROUP" \
+--connection=local \
 --verbose
+
+# --private-key=$PRIVATE_KEY_FILE \
+# --extra-vars="provision_target=$GROUP" \
 
 echo "End of execution Ansible GROUP=$GROUP"

@@ -1,0 +1,17 @@
+2015-10-10 19:10:30,852 p=16821 u=miyata |   
+2015-10-10 19:10:30,852 p=16821 u=miyata |  /usr/local/Cellar/ansible/1.9.3/libexec/bin/ansible-playbook --user=vagrant --connection=ssh --timeout=30 --limit=development --inventory-file=playbook/inventories/development --extra-vars={"provision_target":"development"} -v playbook/site.yml
+2015-10-10 19:10:30,852 p=16821 u=miyata |   
+2015-10-10 19:10:30,953 p=16821 u=miyata |  PLAY [development] ************************************************************ 
+2015-10-10 19:10:30,953 p=16821 u=miyata |  GATHERING FACTS *************************************************************** 
+2015-10-10 19:10:32,691 p=16821 u=miyata |  ok: [192.168.33.10]
+2015-10-10 19:10:32,692 p=16821 u=miyata |  TASK: [common | notice starting] ********************************************** 
+2015-10-10 19:10:32,863 p=16821 u=miyata |  changed: [192.168.33.10] => {"changed": true, "cmd": ["/bin/echo", "Ansible Test !!"], "delta": "0:00:00.001737", "end": "2015-10-10 10:10:31.134943", "rc": 0, "start": "2015-10-10 10:10:31.133206", "stderr": "", "stdout": "Ansible Test !!", "warnings": []}
+2015-10-10 19:10:32,864 p=16821 u=miyata |  TASK: [common | printing roles/common/vars/main.yml] ************************** 
+2015-10-10 19:10:33,034 p=16821 u=miyata |  changed: [192.168.33.10] => {"changed": true, "cmd": ["/bin/echo", "hogehogehoge"], "delta": "0:00:00.002635", "end": "2015-10-10 10:10:31.304817", "rc": 0, "start": "2015-10-10 10:10:31.302182", "stderr": "", "stdout": "hogehogehoge", "warnings": []}
+2015-10-10 19:10:33,035 p=16821 u=miyata |  TASK: [common | install tree command] ***************************************** 
+2015-10-10 19:11:06,468 p=16821 u=miyata |  changed: [192.168.33.10] => {"changed": true, "msg": "", "rc": 0, "results": ["Loaded plugins: fastestmirror, versionlock\nLoading mirror speeds from cached hostfile\n * base: www.ftp.ne.jp\n * epel: ftp.kddilabs.jp\n * extras: www.ftp.ne.jp\n * updates: www.ftp.ne.jp\nSetting up Install Process\nResolving Dependencies\n--> Running transaction check\n---> Package tree.x86_64 0:1.5.3-3.el6 will be installed\n--> Finished Dependency Resolution\n\nDependencies Resolved\n\n================================================================================\n Package         Arch              Version                Repository       Size\n================================================================================\nInstalling:\n tree            x86_64            1.5.3-3.el6            base             36 k\n\nTransaction Summary\n================================================================================\nInstall       1 Package(s)\n\nTotal download size: 36 k\nInstalled size: 65 k\nDownloading Packages:\nRunning rpm_check_debug\nRunning Transaction Test\nTransaction Test Succeeded\nRunning Transaction\n\r  Installing : tree-1.5.3-3.el6.x86_64                                      1/1 \n\r  Verifying  : tree-1.5.3-3.el6.x86_64                                      1/1 \n\nInstalled:\n  tree.x86_64 0:1.5.3-3.el6                                                     \n\nComplete!\n"]}
+2015-10-10 19:11:06,472 p=16821 u=miyata |  PLAY RECAP ******************************************************************** 
+2015-10-10 19:11:06,472 p=16821 u=miyata |  192.168.33.10              : ok=4    changed=3    unreachable=0    failed=0   
+2015-10-10 21:06:56,072 p=18474 u=miyata |   
+2015-10-10 21:06:56,072 p=18474 u=miyata |  /usr/local/Cellar/ansible/1.9.3/libexec/bin/ansible-playbook
+2015-10-10 21:06:56,073 p=18474 u=miyata |   
