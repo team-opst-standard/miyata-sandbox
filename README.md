@@ -164,8 +164,8 @@ ansible defaults \
 ### 上記コマンドの変化形
 playbook/hosts に下記設定を記載すればコマンドはその分短くなる
 ```bash
-[default]
-192.168.33.10 ansible_ssh_private_key_file=/path/to/Vagrant/.vagrant/machines/default/virtualbox/private_key ansible_ssh_user=vagrant
+[development]
+192.168.33.10 ansible_ssh_private_key_file=sample/vagrant/.vagrant/machines/default/virtualbox/private_key ansible_ssh_user=vagrant
 ```
 
 #### 実行
@@ -181,7 +181,7 @@ ansible defaults \
 #### sample/vagrant/playbook/hosts
 ```bash
 [development]
-192.168.33.10
+192.168.33.10 ansible_ssh_private_key_file=sample/vagrant/.vagrant/machines/default/virtualbox/private_key ansible_ssh_user=vagrant
 ```
 
 #### sample/vagrant/playbook/development.yml
