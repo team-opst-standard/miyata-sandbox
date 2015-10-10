@@ -1,0 +1,5 @@
+- name: update yum modules
+  # yum: "name=* state=latest" とも書ける
+  yum:
+    name: "*"
+    state: latest
