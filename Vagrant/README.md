@@ -7,33 +7,30 @@ Vagrant & Ansible 環境構築
 ## 各種ツールのインストール
 ### パッケージ管理ツール
 
-* Mac
-
+#### Mac
+* <a href="http://brew.sh/index_ja.html" target="_blank">Homebrew</a>
 ```bash
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-* Windows
-
-```bash
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
-```
-
-### cask(Macのみ)
-
+* <a href="http://caskroom.io/" target="_blank">Homebrew Cask</a>
 ```bash
 brew install caskroom/cask/brew-cask
 ```
 
-### VirtualBox(5.0.6)
-* Mac
+#### Windows
+* <a href="https://chocolatey.org/" target="_blank">Chocolatey</a>
+```bash
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+```
 
+### <a href="https://www.virtualbox.org/" target="_blank">VirtualBox(5.0.6)</a>
+#### Mac
 ```bash
 brew cask install virtualbox
 ```
 
-* Windows
-
+#### Windows
 ```bash
 choco install -y virtualbox
 ```
@@ -41,56 +38,51 @@ choco install -y virtualbox
 * ※自宅の Windows 環境だと何故か `4.2.12` まで落とさないとNGなので手動でインストール  
 VirtualBox は基本的に最新版だと動作しないイメージだなぁ...  
 ということでバージョンを指定  
-
 ```bash
 choco install virtualbox -version 4.2.12
 ```
 
-### Vagrant(1.7.4)
-* Mac
-
+### <a href="https://www.vagrantup.com/" target="_blank">Vagrant(1.7.4)</a>
+#### Mac
 ```bash
 brew cask install vagrant
 ```
 
-* Windows
-
+#### Windows
 ```bash
 choco install -y vagrant
 ```
 
-### Git(2.6.1)
-* Mac
-
+### <a href="https://git-scm.com/" target="_blank">Git(2.6.1)</a>
+#### Mac
 ```bash
 brew install git
 ```
 
-* Windows
-
+#### Windows
 ```bash
 choco install -y git
 ```
 
-### Ansible(Macのみ)
-
+### <a href="http://www.ansible.com/" target="_blank">Ansible(Macのみ)</a>
+* ホストOSがWindowsの場合は仮想マシン内にインストールするため、ここではMacのみ。
 ```bash
 brew install ansible
 ```
 
-### MinGW(Windows)
-* 下の方法ではエラーになったので、今は深く掘り下げずに手動インストール
-
+### <a href="http://www.mingw.org/" target="_blank">MinGW</a>(Windows)
+* 下の方法ではエラーになったので、今は深く掘り下げずに手動インストール  
 ```bash
 choco install -y mingw
 choco install -y mingw-get -version 1.0.3
+```
 
-# 環境変数設定
+* 環境変数設定  
+```bash
 SETX /M PATH "%PATH%;C:\tools\mingw64\bin;"
 ```
 
 * <a href="http://web.plus-idea.net/2014/06/mingw-install-2014/" target="_blank">手動でインストールした時の参考</a>
-
 ```bash
 SETX /M PATH "%PATH%;C:\MinGW\msys\1.0\bin;"
 ```
