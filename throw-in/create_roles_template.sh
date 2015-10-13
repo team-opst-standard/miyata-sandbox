@@ -4,6 +4,11 @@ CURRENT=`pwd`
 ROLE_NAME=$1
 TARGET_DIR=${2:-$CURRENT}
 
+if [ "$ROLE_NAME" = "" ]; then
+    echo "Argument 1 (as Role Name) is required."
+    exit
+fi
+
 ROLES_DIRECTORIES=("handlers" "tasks" "template" "vars" "meta" "files" "defaults")
 GIT_KEEP_FILE=".gitkeep"
 MAIN_FILE="main.yml"
