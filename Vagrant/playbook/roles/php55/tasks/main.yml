@@ -1,0 +1,10 @@
+- name: Installing PHP 5.5
+  yum:
+    name: "{{ item }}"
+    state: latest
+    enablerepo: "remi,remi-php55"
+  with_items:
+    - php
+    - php-devel
+    - php-mbstring
+    - php-mysql

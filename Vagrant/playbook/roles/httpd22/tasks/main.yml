@@ -1,0 +1,9 @@
+# ひとまずyumのそのままを入れる
+- name: Installing Httpd 2.2.15
+  yum:
+    name: httpd
+    state: latest
+
+- name: Launch Httpd
+  service: name=httpd state=started enabled=yes
+

@@ -1,0 +1,8 @@
+- name: Installing Nginx 1.8.0
+  yum: 
+    name: nginx-1.8.0-1.el6.ngx
+    state: latest
+    enablerepo: nginx
+
+- name: Launch Nginx
+  service: name=nginx state=started enabled=yes

@@ -1,0 +1,39 @@
+# リポジトリ追加
+- name: add yum repositories
+  yum:
+    name: "{{ item }}"
+  with_items:
+    - http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
+    - http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+    # EPEL, RPMforge, Remi
+    - http://ftp-srv2.kddilabs.jp/Linux/distributions/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    - http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+    - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+
+# リポジトリを明示的に指定してインストールさせるためにenabled=0を指定
+- replace: dest=/etc/yum.repos.d/{{item}} regexp="enabled *= *1" replace="enabled=0"
+  with_items:
+    - nginx.repo
+    - mysql-community.repo
+    # EPEL, RPMforge, Remi
+    - epel.repo
+    - rpmforge.repo
+    - remi.repo
+
+# yum のモジュール更新
+# - name: update yum modules
+#   # yum: "name=* state=latest" とも書ける
+#   yum:
+#     name: "*"
+#     state: "latest"
+
+# 開発用ツールインストール
+- name: install dev tools
+  yum:
+    name: "{{ item }}"
+    state: "latest"
+  with_items:
+    - vim
+    - wget
+    - tree
+    - git

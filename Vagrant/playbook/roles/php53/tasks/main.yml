@@ -1,0 +1,5 @@
+# yum install php と同じでただ入れただけのもの
+- name: Installing PHP 5.3.3
+  yum:
+    name: php
+    state: latest
