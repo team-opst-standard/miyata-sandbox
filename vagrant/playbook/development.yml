@@ -14,7 +14,8 @@
   #
   roles:
     - yum
-#     - php55
+    - php55
+
 
 # @TODO
 #     - httpd24

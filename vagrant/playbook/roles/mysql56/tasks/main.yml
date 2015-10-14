@@ -6,8 +6,8 @@
     # for Pyhton
     - MySQL-python
 
-#  - name: Apply Configuration
-#   template: src=my.cnf.j2 dest=/etc/my.cnf
+- name: Apply Configuration
+  template: src=my.cnf.j2 dest=/etc/my.cnf
 
 - name: Launch MySQL 5.6
   service: name=mysqld state=started enabled=yes
