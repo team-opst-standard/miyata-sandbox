@@ -14,7 +14,6 @@
   #
   roles:
     - yum
-    - mysql55
 #     - php55
 
 # @TODO
@@ -27,6 +26,7 @@
 #     - common
 #     - httpd22
 #     - nginx18
+#     - mysql55
 #     - mysql56
 #     - php53
 #     - php55

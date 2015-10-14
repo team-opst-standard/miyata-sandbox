@@ -1,14 +1,22 @@
 - name: Installing MySQL 5.5
-  yum:
-    name: "{{ item }}"
-    state: latest
-    enablerepo: mysql55-community
+  yum: name={{ item }} state=latest enablerepo=mysql55-community
   with_items:
     - mysql-community-client
     - mysql-community-server
+    # for Pyhton
+    - MySQL-python
 
 - name: Apply Configuration
   template: src=my.cnf.j2 dest=/etc/my.cnf
 
 - name: Launch MySQL 5.5
   service: name=mysqld state=started enabled=yes
+
+- name: Create Database
+  mysql_db: name={{ mysql55.db_name }} state=present encoding={{ mysql55.encode }}
+
+- name: Copying Dump Data
+  copy: src=dump.sql.gz dest=/tmp
+
+- name: Import Dump Data
+  mysql_db: name={{ mysql55.db_name }} state=import target=/tmp/dump.sql.gz

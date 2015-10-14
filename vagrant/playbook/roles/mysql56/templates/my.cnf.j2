@@ -4,7 +4,11 @@ socket=/var/lib/mysql/mysql.sock
 
 # Disabling symbolic-links is recommended to prevent assorted security risks
 symbolic-links=0
-port={{ mysql55.port }}
+
+# Recommended in standard MySQL setup
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+port={{ mysql56.port }}
 
 [mysqld_safe]
 log-error=/var/log/mysqld.log
