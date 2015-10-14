@@ -5,6 +5,6 @@
 # ローカル環境用
 - include: development.yml
 
-# 本番などを作る場合はこちらも使う?
+# 本番などを作る場合はこちらも使う
 # - include: webservers.yml
 # - include: dbservers.yml

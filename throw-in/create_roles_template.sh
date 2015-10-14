@@ -9,7 +9,7 @@ if [ "$ROLE_NAME" = "" ]; then
     exit
 fi
 
-ROLES_DIRECTORIES=("handlers" "tasks" "template" "vars" "meta" "files" "defaults")
+ROLES_DIRECTORIES=("handlers" "tasks" "templates" "vars" "meta" "files" "defaults")
 GIT_KEEP_FILE=".gitkeep"
 MAIN_FILE="main.yml"
 

@@ -13,21 +13,20 @@
   # タスクは roles を使用してモジュール化するのがベスト
   #
   roles:
-#     - common
     - yum
-    - httpd22
     - mysql55
-    - php55
+#     - php55
 
 # @TODO
 #     - httpd24
-#     - php55
 #     - php56
 #     - jdk17
 #     - jdk18
 
 # done
+#     - common
 #     - httpd22
 #     - nginx18
 #     - mysql56
 #     - php53
+#     - php55
