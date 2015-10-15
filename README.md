@@ -109,8 +109,8 @@ vagrant up
 ```
 
 ## Ansible のシンプルな設定例
-※Windowsではできませんのでスルーしてください
-※絶対パスで書いていないものはリポジトリのルートディレクトリからの相対
+* ※Windowsではできませんのでスルーしてください
+* ※絶対パスで書いていないものはリポジトリのルートディレクトリからの相対
 
 ### ディレクトリ構造について
 公式のベストプラクティスをそのまま使う
@@ -132,12 +132,14 @@ sample/vagrant/playbook/
 
 検索してもこれを紹介しているところがほとんど無く、  
 パラメータのキーがなぜそうなっているのかわかりづらかった...  
-（`name` はわかるけど `yum`, `name`, `state` あたりはどこから来たんだ状態）
+（`name` はわかるけど `yum`, `name`, `state` あたりはどこから来たんだ状態）  
 ~~最低でもまずドキュメントは読もう~~
 
 ＼公式ドキュメント万歳 & 翻訳感謝／
 
 ### ansible-playbook の前に ansible を試す
+* `yum upgrade` を実行してみます
+
 #### sample/vagrant/playbook/hosts を Vagrant の IP に向ける
 ```bash
 [default]
@@ -185,6 +187,8 @@ ansible defaults \
 ```
 
 #### sample/vagrant/playbook/development.yml
+* roles については後述
+
 ```yml
 - hosts: development
   user: vagrant
@@ -210,7 +214,7 @@ sample/vagrant/playbook/development.yml \
 ```
 
 ## Roles について
-タスクはずらずら書くのではなくモジュール化するのが良いとのこと。  
+playbook のタスクはずらずら書くのではなくモジュール化するのが良いとのことで、
 そのモジュールを配置するのが `roles` ディレクトリ。
 色々できるので `roles` ディレクトリにどんどん追加していくことで環境構築が充実する。
 
@@ -223,19 +227,50 @@ playbook/roles/
 └── common               ... モジュール名。playbook に記載する名前そのもの
     ├── tasks            ... 実行するタスクを main.yml に記載
     │   └── main.yml
-    ├── handlers         ... @TODO 調査中
+    ├── handlers         ... タスクの実行後に実行されるタスク。 tasks/main.yml に notify を設定する
     │   └── main.yml
-    ├── templates        ... @TODO 調査中。設定ファイルなどをテンプレート化して反映するのに使う
+    ├── templates        ... 設定ファイルなどをテンプレート化して反映するために使う
     │   └── main.yml
-    ├── files            ... @TODO 調査中
+    ├── files            ... タスクで使用するシェルスクリプトやタスク内でコピーするファイルの配置場所
     │   ├── hoge.txt
     │   └── fuga.sh
     ├── vars             ... この roles 内で使用するための変数を main.yml に定義
     │   └── main.yml
-    ├── defaults         ... @TODO 調査中
+    ├── defaults         ... roles 内で使用する変数を main.yml に定義。 vars/main.yml よりも優先度低。
     │   └── main.yml
-    └── meta             ... @TODO 調査中
+    └── meta             ... @TODO 調査中（role dependencies）
         └── main.yml
+```
+
+### roles の各ディレクトリにおける役割
+@TODO
+
+## ansible を自分自身のマシンに実行する
+ansible は基本的にSSHでリモートマシンの操作を行うが、
+ローカルのマシンでは `connection` のオプションを設定することでSSH接続を行わずに実行できる
+
+<a href="http://docs.ansible.com/ansible/playbooks_delegation.html#local-playbooks" target="_blank">Delegation, Rolling Updates, and Local Actions &mdash; Ansible Documentation</a>
+
+### 上の例をローカルで実行できるように
+* ※例なので Vagrant の仮想マシン内で実行してます
+* `connection` のオプションはコマンドラインで指定することも可能(`--connection=local`)
+
+#### sample/playbook/loal.yml
+```yml
+- hosts: 127.0.0.1
+  connection: local
+  user: vagrant
+  sudo: yes
+  roles:
+    - common
+```
+
+#### コマンド実行
+```bash
+# yum install ansible
+ansible-playbook \
+/vagrant/playbook/local.yml \
+--verbose
 ```
 
 ## ansible の動作設定のカスタマイズ
@@ -260,4 +295,4 @@ Ansibleの動作設定は `ansible.cfg` ファイルを所定の場所配置す�
 * http://www.moyashi-koubou.com/blog/vagrant_ansible_windows/
 * http://www.kyoshida.jp/ansibledoc-ja/
 * http://keyamb.hatenablog.com/archive/category/Ansible
-
+* http://tdoc.info/blog/2013/04/20/ansible.html

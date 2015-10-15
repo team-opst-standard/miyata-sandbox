@@ -4,5 +4,7 @@
     state: latest
     enablerepo: nginx
 
-- name: Launch Nginx
-  service: name=nginx state=started enabled=yes
+- name: Apply Configuration
+  template: src=example.com.conf.j2 dest=/etc/nginx/conf.d/{{ nginx18.server_name }}.conf
+  notify:
+    - Launch Nginx

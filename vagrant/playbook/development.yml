@@ -14,7 +14,7 @@
   #
   roles:
     - yum
-    - php55
+    - nginx18
 
 
 # @TODO

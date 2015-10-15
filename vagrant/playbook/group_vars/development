@@ -1,3 +1,4 @@
 # ひとまずサンプル。全グループに適用する場合はファイル名をallにする
-nginx_port: 80
-server_hostname: development.example.com
+nginx18:
+  port: 80
+  server_name: development.example.com
