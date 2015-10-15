@@ -5,7 +5,3 @@
 # Vagrant Node IP
 [development]
 192.168.33.10 
-
-# In case of "Guest: Windows, Host: Linux", playbook apply to localhost
-[windows_host]
-127.0.0.1

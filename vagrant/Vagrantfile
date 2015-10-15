@@ -74,11 +74,11 @@ Vagrant.configure(2) do |config|
     # config.vm.provision :shell, path: "for_windows_host.sh"
 
     # @NOTE for Mac
-    config.vm.provision "ansible" do |ansible|
-        ansible.playbook       = "playbook/site.yml"
-        ansible.inventory_path = "playbook/inventories/development"
-        ansible.limit          = "development"
-        ansible.verbose        = "v"
-        ansible.extra_vars     = {provision_target: 'development'}
-    end
+#    config.vm.provision "ansible" do |ansible|
+#        ansible.playbook       = "playbook/site.yml"
+#        ansible.inventory_path = "playbook/inventories/development"
+#        ansible.limit          = "development"
+#        ansible.verbose        = "v"
+#        ansible.extra_vars     = {provision_target: 'development'}
+#    end
 end
