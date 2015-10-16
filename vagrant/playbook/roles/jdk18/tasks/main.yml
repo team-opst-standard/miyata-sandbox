@@ -1,0 +1,10 @@
+- name: Download JDK 1.8
+  command: 'wget -q -O {{ jdk18.src_dest }} {{ jdk18.download_url }} --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie"'
+
+- name: Install JDK 1.8
+  yum: name={{ jdk18.src_dest }}
+
+- name: Set JAVA_HOME to System
+  copy: src=java.sh dest=/etc/profile.d/java.sh owner=root group=root mode=0644
+  notify:
+    - "Reload Source"

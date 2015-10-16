@@ -1,0 +1,3 @@
+jdk18:
+  download_url: http://download.oracle.com/otn-pub/java/jdk/8u51-b16/jdk-8u51-linux-x64.rpm
+  src_dest: /usr/local/src/jdk-8u51-linux-x64.rpm

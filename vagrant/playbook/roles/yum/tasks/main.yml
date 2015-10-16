@@ -19,20 +19,20 @@
     - rpmforge.repo
     - remi.repo
 
-# # yum のモジュール更新
-# - name: update yum modules
-#   # yum: "name=* state=latest" とも書ける
-#   yum:
-#     name: "*"
-#     state: "latest"
+# yum のモジュール更新
+- name: update yum modules
+  # yum: "name=* state=latest" とも書ける
+  yum:
+    name: "*"
+    state: "latest"
 
 # # 開発用ツールインストール
-# - name: install dev tools
-#   yum:
-#     name: "{{ item }}"
-#     state: "latest"
-#   with_items:
-#     - vim
-#     - wget
-#     - tree
-#     - git
+- name: install dev tools
+  yum:
+    name: "{{ item }}"
+    state: "latest"
+  with_items:
+    - vim
+    - wget
+    - tree
+    - git

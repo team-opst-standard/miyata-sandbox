@@ -11,19 +11,17 @@
   sudo: yes
   #
   # タスクは roles を使用してモジュール化するのがベスト
-  # roles/nginx/meta/main.yml の記述により common -> yum -> nginx18 の順番に実行される
   #
   roles:
-#     - yum
-    - nginx18
-#     - common
-
+    - common
+    - yum
 
 # @TODO
 #     - httpd24
 #     - php56
 #     - jdk17
-#     - jdk18
+#     - maven32
+#     - maven33
 
 # done
 #     - common
@@ -33,3 +31,4 @@
 #     - mysql56
 #     - php53
 #     - php55
+#     - jdk18
