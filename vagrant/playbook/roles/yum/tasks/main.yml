@@ -10,15 +10,6 @@
     - http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
     - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 
-# リポジトリを明示的に指定してインストールさせるためにenabled=0を指定
-- replace: dest=/etc/yum.repos.d/{{item}} regexp="enabled *= *1" replace="enabled=0"
-  with_items:
-    - nginx.repo
-    - mysql-community.repo
-    - epel.repo
-    - rpmforge.repo
-    - remi.repo
-
 # yum のモジュール更新
 - name: update yum modules
   # yum: "name=* state=latest" とも書ける
@@ -36,3 +27,5 @@
     - wget
     - tree
     - git
+    - zlib
+    - zlib-devel

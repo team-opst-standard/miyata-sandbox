@@ -20,7 +20,6 @@
 #     - httpd24
 #     - php56
 #     - jdk17
-#     - maven32
 #     - maven33
 
 # done
@@ -32,3 +31,4 @@
 #     - php53
 #     - php55
 #     - jdk18
+#     - maven32
