@@ -5,7 +5,7 @@ Vagrant & Ansible 環境構築
 まだ妄言がほとんどです。
 
 ## 各種ツールのインストール
-### パッケージ管理ツール
+### 01. パッケージ管理ツール
 
 #### Mac
 * <a href="http://brew.sh/index_ja.html" target="_blank">Homebrew</a>
@@ -24,7 +24,7 @@ brew install caskroom/cask/brew-cask
 @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 ```
 
-### <a href="https://www.virtualbox.org/" target="_blank">VirtualBox(5.0.6)</a>
+### 02. <a href="https://www.virtualbox.org/" target="_blank">VirtualBox(5.0.6)</a>
 #### Mac
 ```bash
 brew cask install virtualbox
@@ -42,7 +42,7 @@ VirtualBox は基本的に最新版だと動作しないイメージだなぁ...
 choco install virtualbox -version 4.2.12
 ```
 
-### <a href="https://www.vagrantup.com/" target="_blank">Vagrant(1.7.4)</a>
+### 03. <a href="https://www.vagrantup.com/" target="_blank">Vagrant(1.7.4)</a>
 #### Mac
 ```bash
 brew cask install vagrant
@@ -53,7 +53,7 @@ brew cask install vagrant
 choco install -y vagrant
 ```
 
-### <a href="https://git-scm.com/" target="_blank">Git(2.6.1)</a>
+### 04. <a href="https://git-scm.com/" target="_blank">Git(2.6.1)</a>
 #### Mac
 ```bash
 brew install git
@@ -64,13 +64,13 @@ brew install git
 choco install -y git
 ```
 
-### <a href="http://www.ansible.com/" target="_blank">Ansible(Macのみ)</a>
+### 05. <a href="http://www.ansible.com/" target="_blank">Ansible</a>(Macのみ)
 * ホストOSがWindowsの場合は仮想マシン内にインストールするため、ここではMacのみ。
 ```bash
 brew install ansible
 ```
 
-### <a href="http://www.mingw.org/" target="_blank">MinGW</a>(Windows)
+### 06. <a href="http://www.mingw.org/" target="_blank">MinGW</a>(Windowsのみ)
 * 下の方法ではエラーになったので、今は深く掘り下げずに手動インストール  
 ```bash
 choco install -y mingw
@@ -120,7 +120,7 @@ vagrant up
 sample/vagrant/playbook/
 ├── development.yml        ... playbook 本体
 ├── hosts                  ... 対象のサーバ情報を記載するファイル
-└── roles/                 ... モジュール化したタスクを登録するディレクトリ(後述)
+└── roles/                 ... モジュール化したタスクを登録するディレクトリ(「Roles-について」参照)
      └── common/
          └── tasks/
               └── main.yml
@@ -187,7 +187,7 @@ ansible defaults \
 ```
 
 #### sample/vagrant/playbook/development.yml
-* roles については後述
+* roles については[後述](#roles-について)
 
 ```yml
 - hosts: development
