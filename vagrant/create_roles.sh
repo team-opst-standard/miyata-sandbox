@@ -2,25 +2,25 @@
 
 CURRENT=`pwd`
 ROLE_NAME=$1
-TARGET_DIR=${2:-$CURRENT}
 
 if [ "$ROLE_NAME" = "" ]; then
     echo "Argument 1 (as Role Name) is required."
     exit
 fi
 
+TARGET_DIR=$CURRENT/playbook/roles
 ROLES_DIRECTORIES=("handlers" "tasks" "templates" "vars" "meta" "files" "defaults")
 GIT_KEEP_FILE=".gitkeep"
 MAIN_FILE="main.yml"
 
 yml_template() {
-cat << EOF >> $1
+cat << EOF > $1
 - name: Hello, world!!
   command: "/bin/echo 'Hello, world!!'"
 EOF
 }
 
-mkdir $TARGET_DIR/$ROLE_NAME
+mkdir -p $TARGET_DIR/$ROLE_NAME
 for i in ${ROLES_DIRECTORIES[@]}; do
     echo "mkdir $TARGET_DIR/$ROLE_NAME/$i"
     mkdir $TARGET_DIR/$ROLE_NAME/$i

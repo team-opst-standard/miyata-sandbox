@@ -1,7 +1,0 @@
-# 確認用
-- hosts: dbservers
-  user: vagrant
-  sudo: yes
-  tasks:
-    - name: dbservers check
-      command: "/bin/echo 'ansible dbservers!!'"

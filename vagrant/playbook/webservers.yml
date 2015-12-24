@@ -1,7 +1,0 @@
-# 確認用
-- hosts: webservers
-  user: vagrant
-  sudo: yes
-  tasks:
-    - name: webservers check
-      command: "/bin/echo 'ansible webservers!!'"

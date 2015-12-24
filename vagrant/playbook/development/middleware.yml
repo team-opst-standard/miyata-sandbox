@@ -1,0 +1,21 @@
+#
+# ミドルウェア設定用 playbook
+#
+- hosts: "{{ provision_target }}"
+  user: vagrant
+  sudo: yes
+  roles:
+    - httpd22
+    - nginx18
+    - mysql55
+    - mysql56
+    - php53
+    - php55
+    - jdk18
+
+# @FUTURE
+#     - httpd24
+#     - php56
+#     - jdk17
+#     - maven32
+#     - maven33

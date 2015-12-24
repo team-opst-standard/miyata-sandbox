@@ -1,10 +1,5 @@
 #
-# インクルードするだけのマスター
+# インクルードのみ
 #
-
-# ローカル環境用
-- include: development.yml
-
-# 本番などを作る場合はこちらも使う
-# - include: webservers.yml
-# - include: dbservers.yml
+- include: development/vm_setup.yml
+- include: development/middleware.yml
