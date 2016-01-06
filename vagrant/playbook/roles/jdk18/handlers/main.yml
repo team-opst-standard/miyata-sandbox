@@ -1,2 +1,0 @@
-- name: Reload Source
-  script: /etc/profile.d/java.sh

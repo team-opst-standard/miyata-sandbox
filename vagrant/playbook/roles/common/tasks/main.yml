@@ -7,3 +7,23 @@
   command: "/bin/echo {{ common_var }}"
 
 # その他OSの設定など
+
+# ユーザーとグループ作成
+- name: create Groups
+  group: name={{ item }} state=present
+  with_items:
+    - hoge
+    - fuga
+
+- name: add Users
+  user: name={{ item.name }} group={{ item.group }} password= state=present
+  with_items:
+     - { name: hoge, group: hoge }
+     - { name: fuga, group: fuga  }
+
+- name: chmod Users home
+  file: path=/home/{{ item.name }} mode={{ item.mode }}
+  with_items:
+     - { name: hoge, mode: "0700" }
+     - { name: fuga, mode: "0700" }
+
