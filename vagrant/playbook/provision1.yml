@@ -1,0 +1,5 @@
+#
+# インクルードのみ
+#
+- include: provision1/vm_setup.yml
+- include: provision1/middleware.yml

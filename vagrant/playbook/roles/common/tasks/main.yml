@@ -1,13 +1,3 @@
-# コマンド実行
-- name: notice starting
-  command: "/bin/echo 'Ansible Test !!'"
-
-# 変数も使える
-- name: printing roles/common/vars/main.yml
-  command: "/bin/echo {{ common_var }}"
-
-# その他OSの設定など
-
 # ユーザーとグループ作成
 - name: create Groups
   group: name={{ item }} state=present
@@ -24,6 +14,5 @@
 - name: chmod Users home
   file: path=/home/{{ item.name }} mode={{ item.mode }}
   with_items:
-     - { name: hoge, mode: "0700" }
-     - { name: fuga, mode: "0700" }
-
+     - { name: hoge, mode: "0755" }
+     - { name: fuga, mode: "0755" }

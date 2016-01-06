@@ -1,7 +1,0 @@
-#
-# ローカル環境用設定
-#
-
-# Vagrant Node IP
-[development]
-192.168.33.10 

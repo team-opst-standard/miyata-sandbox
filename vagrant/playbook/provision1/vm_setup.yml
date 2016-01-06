@@ -1,0 +1,15 @@
+#
+# OS設定用 playbook
+#
+#
+# vagrant ユーザーが sudo でタスクを実施するための設定
+#
+- hosts: localhost
+  user: vagrant
+  sudo: yes
+  #
+  # タスクは roles を使用してモジュール化するのがベスト
+  #
+  roles:
+    - common
+    - yum

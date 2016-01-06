@@ -1,5 +1,0 @@
-#
-# インクルードのみ
-#
-- include: development/vm_setup.yml
-- include: development/middleware.yml
