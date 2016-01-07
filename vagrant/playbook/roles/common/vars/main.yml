@@ -1,2 +1,4 @@
-# このrolesの中でのみ有効な変数の設定
-common_var: 1
+common:
+  user:
+    - { name: hoge, group: hoge, home_permission: "0755" }
+    - { name: fuga, group: hoge, home_permission: "0700" }

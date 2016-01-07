@@ -1,18 +1,12 @@
 # ユーザーとグループ作成
 - name: create Groups
-  group: name={{ item }} state=present
-  with_items:
-    - hoge
-    - fuga
+  group: name={{ item.name }} state=present
+  with_items: common.user
 
 - name: add Users
   user: name={{ item.name }} group={{ item.group }} password= state=present
-  with_items:
-     - { name: hoge, group: hoge }
-     - { name: fuga, group: fuga  }
+  with_items: common.user
 
 - name: chmod Users home
-  file: path=/home/{{ item.name }} mode={{ item.mode }}
-  with_items:
-     - { name: hoge, mode: "0755" }
-     - { name: fuga, mode: "0755" }
+  file: path=/home/{{ item.name }} mode={{ item.home_permission }}
+  with_items: common.user

@@ -13,10 +13,13 @@
   service: name=mysqld state=started enabled=yes
 
 - name: Create Database
-  mysql_db: name={{ mysql56.db_name }} state=present encoding={{ mysql56.encode }}
+  mysql_db: name={{ item }} state=present encoding={{ mysql56.encode }}
+  with_items: mysql56.db_name
 
 - name: Copying Dump Data
-  copy: src=dump.sql.gz dest=/tmp
+  copy: src={{ item }}.sql.gz dest=/tmp
+  with_items: mysql56.db_name
 
 - name: Import Dump Data
-  mysql_db: name={{ mysql56.db_name }} state=import target=/tmp/dump.sql.gz
+  mysql_db: name={{ item }} state=import target=/tmp/{{ item }}.sql.gz
+  with_items: mysql56.db_name

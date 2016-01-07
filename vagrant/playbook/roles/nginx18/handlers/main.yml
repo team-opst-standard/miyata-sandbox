@@ -1,2 +1,0 @@
-- name: Launch Nginx
-  service: name=nginx state=started enabled=yes

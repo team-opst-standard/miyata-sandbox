@@ -1,3 +1,0 @@
-nginx18:
-  port: 80
-  server_name: example.com

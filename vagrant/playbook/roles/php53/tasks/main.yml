@@ -3,3 +3,6 @@
   yum:
     name: php
     state: latest
+
+- name: Apply Configuration
+  template: src=php.ini.j2 dest=/etc/php.ini

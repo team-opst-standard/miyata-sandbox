@@ -1,14 +1,14 @@
 #
-# OS設定用 playbook
-#
-#
-# vagrant ユーザーが sudo でタスクを実施するための設定
+# Guest OS設定用 playbook
 #
 - hosts: localhost
+  #
+  # vagrant ユーザーが sudo でタスクを実施するための設定
+  #
   user: vagrant
   sudo: yes
   #
-  # タスクは roles を使用してモジュール化するのがベスト
+  # task は roles を使用してモジュール化
   #
   roles:
     - common

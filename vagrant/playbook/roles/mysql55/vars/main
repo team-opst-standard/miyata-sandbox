@@ -1,5 +1,0 @@
-# as default value
-mysql55: 
-  db_name: vagrant_example
-  encode:  utf8
-  port:    3306

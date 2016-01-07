@@ -1,0 +1,5 @@
+mysql55: 
+  encode:  utf8
+  port:    3306
+  db_name:
+    - vagrant_example

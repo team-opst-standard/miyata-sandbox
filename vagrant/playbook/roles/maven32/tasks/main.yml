@@ -3,7 +3,6 @@
 
 - name: Install maven 3.2
   command: sudo tar zxvf {{ maven32.src_dest }} chdir=/opt 
-#   src={{ maven32.src_dest }} dest={{ maven32.install_dest }}
 
 - name: Set M3_HOME to System
   copy: src=maven.sh dest=/etc/profile.d/maven.sh owner=root group=root mode=0744

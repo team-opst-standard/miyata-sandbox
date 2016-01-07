@@ -5,19 +5,19 @@
   user: vagrant
   sudo: yes
   roles:
-    - httpd22
-    - mysql56
+    - mysql55
+#    - mysql56
+#    - php53
     - php55
-
-# exclude
-#     - nginx18
-#     - mysql55
-#     - php53
-#     - jdk18
+#    - php56
+    - httpd22
+#    - nginx18
+#    - jdk18
+#    - maven32
+#    - memcached
 
 # @FUTURE
-#     - httpd24
-#     - php56
-#     - jdk17
-#     - maven32
-#     - maven33
+#    - php70
+#    - httpd24
+#    - jdk17
+#    - maven33

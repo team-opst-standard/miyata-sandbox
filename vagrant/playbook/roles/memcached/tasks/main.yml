@@ -1,0 +1,15 @@
+- name: Install Memcached
+  yum: name=memcached state=latest
+
+- name: Apply Configuration
+  template: src=memcached.j2 dest=/etc/init.d/memcached owner=root group=root mode=0755
+
+- name: Create Directory /var/run/memcached
+  file: path=/var/run/memcached state=directory owner=root group=root mode=0755
+
+# Memcached can't run memcached without creating link to env PATH.
+#- name: Create Link to Commands
+#  file: src=/usr/local/bin/memcached dest=/usr/bin/memcached owner=root group=root state=link
+
+- name: Launch Memcached
+  service: name=memcached state=started enabled=yes

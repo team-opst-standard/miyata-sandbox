@@ -5,6 +5,7 @@
     enablerepo: nginx
 
 - name: Apply Configuration
-  template: src=example.com.conf.j2 dest=/etc/nginx/conf.d/{{ nginx18.server_name }}.conf
-  notify:
-    - Launch Nginx
+  template: src={{ nginx18.server_name }}.conf.j2 dest=/etc/nginx/conf.d/{{ nginx18.server_name }}.conf
+
+- name: Launch Nginx
+  service: name=nginx state=started enabled=yes

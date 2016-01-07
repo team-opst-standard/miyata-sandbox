@@ -1,0 +1,6 @@
+memcached14:
+  port: 12345
+  user: hoge
+  max_connection: 1024
+  cache_size: 128
+  options:
