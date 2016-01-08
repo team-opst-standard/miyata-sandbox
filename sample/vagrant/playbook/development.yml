@@ -1,5 +1,0 @@
-- hosts: development
-  user: vagrant
-  sudo: yes
-  roles:
-    - common
