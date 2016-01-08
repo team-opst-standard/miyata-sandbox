@@ -1,5 +1,22 @@
-#
-# インクルードのみ
-#
-- include: provision1/vm_setup.yml
-- include: provision1/middleware.yml
+- hosts: localhost
+  user: vagrant
+  sudo: yes
+  roles:
+    - common
+    - yum
+    - mysql55
+#    - mysql56
+#    - php53
+    - php55
+#    - php56
+    - httpd22
+#    - nginx18
+#    - jdk18
+#    - maven32
+#    - memcached
+
+# @FUTURE
+#    - php70
+#    - httpd24
+#    - jdk17
+#    - maven33

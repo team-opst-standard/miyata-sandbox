@@ -2,8 +2,47 @@ Vagrant & Ansible を用いた環境構築
 ======
 
 ## はじめに
+* LAMP環境を構築(CentO6.5 + Apache2.2 + MySQL5.5 + PHP5.5)
 * ローカル開発環境を構築する為のもので、それ以外の環境は対象外
 * VagrantとAnsibleに最低限知識がある人向け
+* Java8なども導入可能(オマケ)
+
+## ディレクトリ構造
+* 公式のベストプラクティスをそのまま使用  
+<a href="http://docs.ansible.com/ansible/playbooks_best_practices.html#directory-layout" target="_blank">Best Practices &mdash; Ansible Documentation</a>
+
+```bash
+miyata-sandbox
+├── README.md
+└── vagrant
+    ├── Vagrantfile
+    ├── ansible.cfg
+    ├── create_roles.sh     ... rolesの雛形を作る
+    ├── playbook
+    │   ├── group_vars
+    │   ├── host_vars
+    │   ├── inventories
+    │   ├── library
+    │   ├── log            ... playbookのログ配置場所
+    │   ├── provision1.yml ... provision1.shで呼ばれるplaybook
+    │   └── roles
+    │       ├── common     ... ユーザー作成
+    │       ├── httpd22    ... yumによるhttpd2.2インストール, httpd.conf適用, サービス起動
+    │       ├── jdk18      ... JDK1.8をrpmパッケージからインストール, PATH追加用スクリプト配置
+    │       ├── maven32    ... Maven3.2のアーカイブをダウンロードして所定の場所に配置, PATH追加用スクリプト配置
+    │       ├── memcached  ... yumによるMemcached1.4インストール, 起動スクリプト適用, サービス起動
+    │       ├── mysql55    ... yumによるMySQL5.6インストール, my.cnf適用, サンプルDBのダンプインポート, サービス起動
+    │       ├── mysql56    ... yumによるMySQL5.6インストール, my.cnf適用, サンプルDBのダンプインポート, サービス起動
+    │       ├── nginx18    ... yumによるNginx1.8インストール, nginx.conf適用, サービス起動
+    │       ├── php53      ... yumによるPHP5.3インストール, php.ini適用
+    │       ├── php55      ... yumによるPHP5.5インストール, php.ini適用
+    │       ├── php56      ... yumによるPHP5.6インストール, php.ini適用
+    │       └── yum        ... リポジトリ追加, 最新化, 諸ツールインストール
+    ├── provision1.sh
+    ├── provision2.sh
+    ├── setup.bat
+    └── setup.sh
+```
 
 ## 各種ツールのインストール
 ### 01. パッケージ管理ツール
@@ -85,57 +124,28 @@ SETX /M PATH "%PATH%;C:\tools\mingw64\bin;"
 SETX /M PATH "%PATH%;C:\MinGW\msys\1.0\bin;"
 ```
 
-## Vagrantセットアップ
+## 環境構築
 
 * 基本的に git clone & setup.bat 実行で終了させる想定
+
+### リポジトリをクローン
 
 ```bash
 cd /path/to/vagrant_dir
 git clone https://github.com/team-opst-standard/miyata-sandbox.git
 cd miyata-sandbox/vagrant
+```
 
+### インストールするものを選ぶ
+
+* `playbook/provision1.yml` を編集して実行するrolesを設定
+
+### Vagrantセットアップ
+
+```bash
 # setup.bat(Macならsetup.sh)を実行
 setup.bat
 
 # やり直す
 vagrant destroy -f
 ```
-
-## ディレクトリ構造
-* 公式のベストプラクティスをそのまま使用  
-<a href="http://docs.ansible.com/ansible/playbooks_best_practices.html#directory-layout" target="_blank">Best Practices &mdash; Ansible Documentation</a>
-
-```bash
-miyata-sandbox
-├── README.md
-└── vagrant
-    ├── Vagrantfile
-    ├── ansible.cfg
-    ├── create_roles.sh .... rolesの雛形を作る
-    ├── playbook
-    │   ├── group_vars
-    │   ├── host_vars
-    │   ├── inventories
-    │   ├── library
-    │   ├── log ... playbookのログ配置場所
-    │   ├── provision1 ... provision1.ymlからincludeされるタスク
-    │   ├── provision1.yml ... provision1.shで呼ばれるplaybook
-    │   └── roles
-    │       ├── common    ... ユーザー作成
-    │       ├── httpd22   ... yumによるhttpd2.2インストール, httpd.conf適用, サービス起動
-    │       ├── jdk18     ... JDK1.8をrpmパッケージからインストール, PATH追加用スクリプト配置
-    │       ├── maven32   ... Maven3.2のアーカイブをダウンロードして所定の場所に配置, PATH追加用スクリプト配置
-    │       ├── memcached ... yumによるMemcached1.4インストール, 起動スクリプト適用, サービス起動
-    │       ├── mysql55   ... yumによるMySQL5.6インストール, my.cnf適用, サンプルDBのダンプインポート, サービス起動
-    │       ├── mysql56   ... yumによるMySQL5.6インストール, my.cnf適用, サンプルDBのダンプインポート, サービス起動
-    │       ├── nginx18   ... yumによるNginx1.8インストール, nginx.conf適用, サービス起動
-    │       ├── php53     ... yumによるPHP5.3インストール, php.ini適用
-    │       ├── php55     ... yumによるPHP5.5インストール, php.ini適用
-    │       ├── php56     ... yumによるPHP5.6インストール, php.ini適用
-    │       └── yum       ... リポジトリ追加, 最新化, 諸ツールインストール
-    ├── provision1.sh
-    ├── provision2.sh
-    ├── setup.bat
-    └── setup.sh
-```
-

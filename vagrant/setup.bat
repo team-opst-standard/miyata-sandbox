@@ -1,3 +1,4 @@
+@echo off
 
 echo "SHELL TASK [Vagrant up] ********************************************************"
 vagrant up --no-provision
