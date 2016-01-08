@@ -5,6 +5,7 @@ Vagrant & Ansible を用いた環境構築
 * LAMP環境を構築(CentO6.5 + Apache2.2 + MySQL5.5 + PHP5.5)
 * ローカル開発環境を構築する為のもので、それ以外の環境は対象外
 * VagrantとAnsibleに最低限知識がある人向け
+* ミドルウェアは基本的にyumでインストールしているのでその辺りの知識がある人向け
 * Java8なども導入可能(オマケ)
 
 ## ディレクトリ構造
@@ -38,11 +39,16 @@ miyata-sandbox
     │       ├── php55      ... yumによるPHP5.5インストール, php.ini適用
     │       ├── php56      ... yumによるPHP5.6インストール, php.ini適用
     │       └── yum        ... リポジトリ追加, 最新化, 諸ツールインストール
-    ├── provision1.sh
+    ├── provision1.sh       ... "provision1.sh, provision2.sh, ..." は再起動が必要な場合に分ける想定
     ├── provision2.sh
-    ├── setup.bat
+    ├── setup.bat           ... vagrantの起動とprovisioningを制御
     └── setup.sh
 ```
+
+## ファイルの説明
+
+@TODO
+
 
 ## 準備: 各種ツールのインストール
 ### 01. パッケージ管理ツール
