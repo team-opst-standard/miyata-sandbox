@@ -9,22 +9,21 @@
     - http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
     - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 
-#- name: update yum modules
-#  yum:
-#    name: "*"
-#    state: "latest"
-#
-#- name: install dev tools
-#  yum:
-#    name: "{{ item }}"
-#    state: "latest"
-#  with_items:
-#    - ansible
-#    - git
-#    - vim
-#    - wget
-#    - tree
-#    - zlib
-#    - zlib-devel
-#    - dnsmasq
-#    - libselinux-python
+- name: update yum modules
+  yum:
+    name: "*"
+    state: "latest"
+
+- name: install dev tools
+  yum:
+    name: "{{ item }}"
+    state: "latest"
+  with_items:
+    - dnsmasq
+    - git
+    - libselinux-python
+    - tree
+    - vim
+    - wget
+    - zlib
+    - zlib-devel
