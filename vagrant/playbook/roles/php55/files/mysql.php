@@ -1,7 +1,7 @@
 <?php // check DB connection
 try
 {
-    $pdo = new PDO('mysql:dbname=vagrant_example;host=localhost', 'rooot', '');
+    $pdo = new PDO('mysql:dbname=vagrant_example;host=localhost', 'root', '');
 }
 catch (PDOException $e)
 {

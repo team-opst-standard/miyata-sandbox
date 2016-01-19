@@ -197,3 +197,5 @@ select * from test;
 * `php -v` コマンドでバージョンを確認
 * http://192.168.33.10/phpinfo.php にアクセスして `phpinfo();` の結果が表示されること
 * http://192.168.33.10/mysql.php にアクセスして vagrant_example.test のレコードが表示されること
+
+おわり
