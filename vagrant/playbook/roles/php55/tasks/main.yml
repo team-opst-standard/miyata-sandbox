@@ -11,3 +11,9 @@
 
 - name: Apply Configuration
   template: src=php.ini.j2 dest=/etc/php.ini
+
+- name: Copy Sample Script.
+  copy: src={{ item }}.php dest=/var/www/html/{{ item }}.php owner=root group=root mode=0644
+  with_items:
+    - phpinfo
+    - mysql

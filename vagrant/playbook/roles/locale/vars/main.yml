@@ -1,0 +1,5 @@
+locale: 
+  locale: ja_JP
+  encode: UTF-8
+  zone: Asia/Tokyo
+  zoneinfo_path: /usr/share/zoneinfo/Asia/Tokyo

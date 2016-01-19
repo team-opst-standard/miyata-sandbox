@@ -152,6 +152,74 @@ cd miyata-sandbox/vagrant
 # setup.bat(Macならsetup.sh)を実行
 setup.bat
 
-# やり直す
+# やり直す場合は下記実行後にもう一度setup.batを実行
 vagrant destroy -f
 ```
+
+以上で環境構築は終了。
+
+
+## 環境の確認
+
+### Vagrant 起動
+* 上記環境構築の後であればVagrantは再起動済みの為、下記手順は不要。  
+下記は次回以降のVagrant起動コマンド。
+
+```
+# vagrant up 以外のコマンドも原則下記ディレクトリに移動してから実行
+cd /path/to/vagrant_dir/miyata-sandbox/vagrant
+vagrant up
+```
+
+### Vagrant へのSSH接続確認
+
+```
+vagrant ssh
+```
+
+### Apache HTTPD 確認
+* http://192.168.33.10 にアクセスして初期画面が表示されること
+* WindowsだとAnsibleからはhostsを触れないのでIPでの確認となる
+
+### MySQL 確認
+* MySQLに接続してサンプルのDBが確認できること
+
+```
+mysql -uroot
+
+show databases;
+use vagrant_example;
+show tables;
+select * from test;
+```
+
+### PHP 確認
+* `php -v` コマンドでバージョンを確認
+* http://192.168.33.10/phpinfo.php にアクセスして `phpinfo();` の結果が表示されること
+* http://192.168.33.10/mysql.php にアクセスして vagrant_example.test のレコードが表示されること
+
+
+## 各種モジュールの設定ファイル配置場所と再起動方法
+
+### Apache HTTPD
+* インストール場所  
+`/etc/httpd`
+* 設定ファイル配置場所  
+`/etc/httpd/conf/httpd.conf`
+
+* サービス再起動などはserviceコマンドで通常通り実施  
+`sudo service httpd restart`
+
+### MySQL
+* 設定ファイル配置場所  
+`/etc/my.cnf`
+
+* サービス再起動などはserviceコマンドで通常通り実施  
+`sudo service mysqld restart`
+
+### PHP
+* 設定ファイル配置場所  
+`/etc/php.ini`
+
+
+おわり

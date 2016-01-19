@@ -3,6 +3,7 @@
   sudo: yes
   roles:
     - common
+    - locale
     - yum
     - mysql55
 #    - mysql56

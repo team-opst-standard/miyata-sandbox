@@ -1,0 +1,24 @@
+- name: set Locale to /etc/sysconfig/i18n
+  replace: >
+    dest=/etc/sysconfig/i18n
+    regexp='^LANG=.*$'
+    replace='LANG="{{ locale.locale }}.{{ locale.encode }}"'
+
+- name: set zone to /etc/sysconfig/clock
+  replace: >
+    dest=/etc/sysconfig/clock
+    regexp='^ZONE=.*$'
+    replace='ZONE="{{ locale.zone }}"'
+
+- name: set localtime
+  file: >
+    src={{ locale.zoneinfo_path }}
+    dest=/etc/localtime
+    state=link
+    force=yes
+
+- name: Apply Locale
+  shell: "{{ item }}"
+  with_items:
+    - ". /etc/sysconfig/i18n"
+    - ". /etc/sysconfig/clock"
