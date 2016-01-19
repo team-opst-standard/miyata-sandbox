@@ -26,8 +26,4 @@ Vagrant.configure(2) do |config|
     config.vm.provision "provision1", type: "shell" do |sh|
         sh.path = "provision1.sh"
     end
-
-    config.vm.provision "provision2", type: "shell" do |sh|
-        sh.path = "provision2.sh"
-    end
 end

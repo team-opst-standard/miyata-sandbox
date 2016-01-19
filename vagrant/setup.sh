@@ -22,9 +22,6 @@ vagrant provision --provision-with provision1
 echo "SHELL TASK [Vagrant Reload] ****************************************************"
 vagrant reload
 
-echo "SHELL TASK [Vagrant provision (2)] *********************************************"
-vagrant provision --provision-with provision2
-
 echo "SHELL TASK [modificate Log file] ***********************************************"
 LF=$(printf '\\\012_')
 LF=${LF%_}

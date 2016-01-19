@@ -2,3 +2,4 @@ common:
   user:
     - { name: hoge, group: hoge, home_permission: "0755" }
     - { name: fuga, group: hoge, home_permission: "0700" }
+    

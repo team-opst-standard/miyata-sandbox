@@ -8,6 +8,3 @@ vagrant provision --provision-with provision1
 
 echo "SHELL TASK [Vagrant Reload] ****************************************************"
 vagrant reload
-
-echo "SHELL TASK [Vagrant provision (2)] *********************************************"
-vagrant provision --provision-with provision2
