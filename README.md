@@ -198,4 +198,28 @@ select * from test;
 * http://192.168.33.10/phpinfo.php にアクセスして `phpinfo();` の結果が表示されること
 * http://192.168.33.10/mysql.php にアクセスして vagrant_example.test のレコードが表示されること
 
+
+## 各種モジュールの設定ファイル配置場所と再起動方法
+
+### Apache HTTPD
+* インストール場所  
+`/etc/httpd`
+* 設定ファイル配置場所  
+`/etc/httpd/conf/httpd.conf`
+
+* サービス再起動などはserviceコマンドで通常通り実施  
+`sudo service httpd restart`
+
+### MySQL
+* 設定ファイル配置場所  
+`/etc/my.cnf`
+
+* サービス再起動などはserviceコマンドで通常通り実施  
+`sudo service mysqld restart`
+
+### PHP
+* 設定ファイル配置場所  
+`/etc/php.ini`
+
+
 おわり
