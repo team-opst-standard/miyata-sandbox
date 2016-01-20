@@ -1,0 +1,1 @@
+export KERN_DIR=/usr/src/kernels/2.6.32-431.3.1.el6.x86_64
