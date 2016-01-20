@@ -1,0 +1,6 @@
+- name: Kernel Install
+  yum: name=http://vault.centos.org/6.5/updates/x86_64/Packages/kernel-devel-2.6.32-431.3.1.el6.x86_64.rpm state=present
+
+# require reloading after following command
+- name: Set KERN_DIR to System
+  copy: src=kernel.sh dest=/etc/profile.d/kernel.sh owner=root group=root mode=0644
