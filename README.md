@@ -102,8 +102,8 @@ choco install -y vagrant
 ```
 
 #### ※注意※ Vagrant のプラグインについて
-* 現在、下記プラグイン導入済みのVagrantにおいて正常動作しない場合がある
-`vagrant-vbguest`
+現在、下記プラグイン導入済みのVagrantにおいて正常動作しない場合がある
+* `vagrant-vbguest`
 
 
 ### 04. <a href="https://git-scm.com/" target="_blank">Git(2.6.1)</a>
