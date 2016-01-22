@@ -105,6 +105,8 @@ choco install -y vagrant
 現在、下記プラグイン導入済みのVagrantにおいて正常動作しない場合がある
 * `vagrant-vbguest`
 
+もしプラグインを使用している場合、下記コマンドで削除
+* `vagrant plugin uninstall [plugin-name]`
 
 ### 04. <a href="https://git-scm.com/" target="_blank">Git(2.6.1)</a>
 #### Mac
